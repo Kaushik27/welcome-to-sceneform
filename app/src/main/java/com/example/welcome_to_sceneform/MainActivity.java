@@ -211,15 +211,19 @@ public class MainActivity extends AppCompatActivity {
         return;
     }
 
-    public void startAnimation(TransformableNode node, ModelRenderable renderable){
-        if(renderable==null || renderable.getAnimationDataCount() == 0) {
+    public void startAnimation(TransformableNode node, ModelRenderable renderable) {
+        if (renderable == null || renderable.getAnimationDataCount() == 0) {
             return;
         }
-        for(int i = 0;i < renderable.getAnimationDataCount();i++){
+        for (int i = 0; i < renderable.getAnimationDataCount(); i++) {
             AnimationData animationData = renderable.getAnimationData(i);
         }
         ModelAnimator animator = new ModelAnimator(renderable.getAnimationData(0), renderable);
         animator.start();
+        node.setOnTapListener(
+                (hitTestResult, motionEvent) -> {
+                    togglePauseAndResume(animator);
+                });
     }
 
     public void togglePauseAndResume(ModelAnimator animator) {
